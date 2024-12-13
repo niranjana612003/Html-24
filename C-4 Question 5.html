@@ -1,0 +1,22 @@
+<html>
+<head>
+
+    <style>
+        #myText {
+            font-size: 24px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="myText">Click the button to change colour</h1>
+    <button onclick="changeColor()">Change Color</button>
+
+    <script>
+        function changeColor() {
+            var textElement = document.getElementById("myText");
+            textElement.style.color = "green";
+        }
+    </script>
+</body>
+</html>

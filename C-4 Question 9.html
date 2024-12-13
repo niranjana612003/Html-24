@@ -1,0 +1,109 @@
+<html>
+<head>
+    
+    <title>Year Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .calendar-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .month {
+            width: 30%;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .month-header {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .days div {
+            text-align: center;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        .input-section input {
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="input-section">
+        <label for="year">Enter Year: </label>
+        <input type="number" id="year" min="1900" max="2100" placeholder="Enter a year">
+        <button onclick="generateCalendar()">Generate Calendar</button>
+    </div>
+
+    <div class="calendar-container" id="calendar"></div>
+
+    <script>
+        function generateCalendar() {
+            const year = document.getElementById('year').value;
+            if (!year || year < 1900 || year > 2100) {
+                alert("Please enter a valid year.");
+                return;
+            }
+
+            const calendarContainer = document.getElementById('calendar');
+            calendarContainer.innerHTML = "";  
+
+           
+            for (let month = 0; month < 12; month++) {
+                const monthName = new Date(year, month).toLocaleString('default', { month: 'long' });
+                const firstDayOfMonth = new Date(year, month, 1);
+                const lastDayOfMonth = new Date(year, month + 1, 0);
+                
+                const daysInMonth = lastDayOfMonth.getDate();
+                const startDay = firstDayOfMonth.getDay(); 
+
+                const monthContainer = document.createElement('div');
+                monthContainer.classList.add('month');
+
+                const monthHeader = document.createElement('div');
+                monthHeader.classList.add('month-header');
+                monthHeader.textContent = monthName + " " + year;
+                monthContainer.appendChild(monthHeader);
+
+                const daysGrid = document.createElement('div');
+                daysGrid.classList.add('days');
+
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                dayNames.forEach(day => {
+                    const dayName = document.createElement('div');
+                    dayName.textContent = day;
+                    daysGrid.appendChild(dayName);
+                });
+
+                for (let i = 0; i < startDay; i++) {
+                    const emptyDiv = document.createElement('div');
+                    daysGrid.appendChild(emptyDiv);
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.textContent = day;
+                    daysGrid.appendChild(dayDiv);
+                }
+
+                monthContainer.appendChild(daysGrid);
+                calendarContainer.appendChild(monthContainer);
+            }
+        }
+    </script>
+
+</body>
+</html>

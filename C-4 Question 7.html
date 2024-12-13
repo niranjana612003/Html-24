@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Change Paragraph Background Color</title>
+</head>
+<style>
+h1,h2{
+color:red;
+text-align:center;
+}
+	p{
+		
+		text-align:center;
+		}
+	
+
+</style>
+<body>
+  <p>
+    <button onclick="changeParagraphBackgroundcolor()">Set Color</button></p>
+	<h2><u>JAVA SCRIPT</u></h2>
+
+    <script>
+
+        function changeParagraphBackgroundcolor() {
+
+            var color = prompt("What color would you like the paragraph background to be?");
+
+
+            if (color) {
+
+                var newParagraph = document.createElement("p");
+
+
+                newParagraph.style.backgroundColor = color;
+
+                newParagraph.innerText = "Java is a programming language and computing platform that's used to create applications for a variety of devices and platforms. Here are some details about Java" + color + ".";
+
+                
+                document.body.appendChild(newParagraph);
+            } else {
+                alert("You didn't enter a color!");
+            }
+        }
+    </script>
+</body>
+</html>
